@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
-    "kodeloper": "npx babel src --out-dir build --presets=env && node ./build/index.js"
+    "build": "npx babel src --out-dir build --presets=env",
+    "upload": "node -r dotenv/config ./build/index.js -- upload",
+    "kodeloper": "npm run build && npm run upload"
   },
   "repository": {
     "type": "git",

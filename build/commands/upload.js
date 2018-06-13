@@ -12,12 +12,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 require('dotenv').config();
 
+var ftpClient = new _ftp2.default();
 var upload = function upload(cmd) {
-    var source = cmd.source || process.env.DESTINATION_DIR;
+    console.log(cmd.source);
+    var source = cmd.source || process.env.SOURCE_DIR;
     var dest = cmd.dest || process.env.DESTINATION_DIR;
     console.log('Uploading %s to  %s', source, dest);
-    _ftp2.default.uploadDir(source, dest);
-    FTO.end();
+    /*  ftpClient.uploadDir(source, dest);
+     ftpClient.end(); */
 };
 
 exports.default = upload;

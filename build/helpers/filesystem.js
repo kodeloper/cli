@@ -16,14 +16,16 @@ var FileSystem = function () {
         _classCallCheck(this, FileSystem);
     }
 
-    _createClass(FileSystem, [{
+    _createClass(FileSystem, null, [{
         key: 'getDirFiles',
         value: function getDirFiles(dir) {
-            var _this = this;
-
-            return fs.readdirSync(dir).reduce(function (files, file) {
-                return fs.statSync(path.join(dir, file)).isDirectory() ? files.concat(_this.getDirFiles(path.join(dir, file))) : files.concat(path.join(dir, file));
-            }, []);
+            console.log(dir);
+            /*  return fs.readdirSync(dir)
+                 .reduce((files, file) =>
+                     fs.statSync(path.join(dir, file)).isDirectory() ?
+                         files.concat(this.getDirFiles(path.join(dir, file))) :
+                         files.concat(path.join(dir, file)),
+                 []); */
         }
     }]);
 

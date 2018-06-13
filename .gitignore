@@ -62,3 +62,4 @@ bundle-stats.json
 .vscode
 .build
 .history
+.env

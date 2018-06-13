@@ -17,7 +17,7 @@ class FTP {
     }
     uploadDir(source_dir, destionation_dir) {
         this.connect();
-        /* this.client.on('ready', function() {
+        this.client.on('ready', () => {
             this.client.cwd('destionation_dir',(error,currentDir)=>console.log({error,currentDir}));
             FileSystem.getDirFiles(source_dir).forEach(file => {
                 this.client.put(file, file.replace(source_dir,''), function(err) {
@@ -25,13 +25,11 @@ class FTP {
                     this.end();
                 });
             });
-        }); */
+        });
     }
     end() {
-        this.client.end;
+        return this.client.end;
     }
 }
 
 export default FTP;
-
-

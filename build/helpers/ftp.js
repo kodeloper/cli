@@ -38,21 +38,25 @@ var FTP = function () {
     }, {
         key: 'uploadDir',
         value: function uploadDir(source_dir, destionation_dir) {
+            var _this = this;
+
             this.connect();
-            /* this.client.on('ready', function() {
-                this.client.cwd('destionation_dir',(error,currentDir)=>console.log({error,currentDir}));
-                FileSystem.getDirFiles(source_dir).forEach(file => {
-                    this.client.put(file, file.replace(source_dir,''), function(err) {
+            this.client.on('ready', function () {
+                _this.client.cwd('destionation_dir', function (error, currentDir) {
+                    return console.log({ error: error, currentDir: currentDir });
+                });
+                _filesystem2.default.getDirFiles(source_dir).forEach(function (file) {
+                    _this.client.put(file, file.replace(source_dir, ''), function (err) {
                         if (err) throw err;
                         this.end();
                     });
                 });
-            }); */
+            });
         }
     }, {
         key: 'end',
         value: function end() {
-            this.client.end;
+            return this.client.end;
         }
     }]);
 
