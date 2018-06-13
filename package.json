@@ -1,0 +1,53 @@
+{
+  "name": "kodeloper-cli",
+  "version": "0.1.1",
+  "description": "Kodeloper CLI helper tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "kodeloper": "npx babel src --out-dir build --presets=env && node ./build/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kodeloper/cli.git"
+  },
+  "keywords": [
+    "cli",
+    "node",
+    "kodeloper",
+    "js",
+    "development",
+    "tools"
+  ],
+  "author": "kodeloper",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kodeloper/cli/issues"
+  },
+  "homepage": "https://github.com/kodeloper/cli#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "chalk": "^2.4.1",
+    "commander": "^2.15.1",
+    "dotenv": "^6.0.0",
+    "fs-extra": "^6.0.1",
+    "ftp": "^0.3.10",
+    "inquirer": "^6.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0"
+  },
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "node": "6.10"
+        }
+      }
+    ]
+  ]
+}
