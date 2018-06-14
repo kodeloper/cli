@@ -2,7 +2,8 @@ const kodeloper = require('commander');
 import { version } from '../package';
 import FileSystem from './helpers/filesystem';
 const CFonts = require('cfonts');
- 
+const chalk = require('chalk');
+
 CFonts.say('Kodeloper', {
     font: 'block',              // define the font face
     align: 'center',              // define text alignment
@@ -11,8 +12,8 @@ CFonts.say('Kodeloper', {
 
 // commands
 import upload from './commands/upload';
-import jira from './commands/jira';
-import bitbucket from './commands/bitbucket';
+import JiraCommand from './commands/jira';
+import BitbucketCommand from './commands/bitbucket';
 
 kodeloper
   .version(version, '-v --version');
@@ -27,12 +28,25 @@ kodeloper
 kodeloper
   .command('jira')
   .description('Jira info')
-  .action(jira);
+  .action((cmd) => {
+    console.log(chalk.blue('Jira command'));
+    const jira = new JiraCommand(cmd);
+    jira.start();
+  });
 
 kodeloper
   .command('bitbucket')
   .description('Bitbuckets info')
-  .action(bitbucket);
-  
+  .action((cmd) => {
+    console.log(chalk.blue('Bitbucket command'));
+    const bitbucket = new BitbucketCommand(cmd);
+    bitbucket.start();
+  });
+
+kodeloper.on('command:*', function () {
+  console.error('Invalid command: %s\nSee --help for a list of available commands.', kodeloper.args.join(' '));
+  process.exit(0);
+});
+
 kodeloper.parse(process.argv);
  
