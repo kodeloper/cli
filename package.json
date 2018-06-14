@@ -6,7 +6,7 @@
   "scripts": {
     "test": "test",
     "build": "npx babel src --out-dir build --presets=env",
-    "upload": "node -r dotenv/config ./build/index.js -- upload",
+    "upload": "node -r dotenv/config ./build/index.js -- bitbucket",
     "kodeloper": "npm run build && npm run upload"
   },
   "repository": {
@@ -29,12 +29,16 @@
   "homepage": "https://github.com/kodeloper/cli#readme",
   "dependencies": {
     "axios": "^0.18.0",
+    "bitbucket-api-v2": "^0.6.2",
+    "cfonts": "^2.1.2",
     "chalk": "^2.4.1",
     "commander": "^2.15.1",
     "dotenv": "^6.0.0",
     "fs-extra": "^6.0.1",
     "ftp": "^0.3.10",
-    "inquirer": "^6.0.0"
+    "inquirer": "^6.0.0",
+    "jira-client": "^6.4.1",
+    "request": "^2.87.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

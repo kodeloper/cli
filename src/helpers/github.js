@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { ENGINE_METHOD_DIGESTS } from 'constants';
 
 const BASE_URL = 'https://api.github.com/repos';
 
