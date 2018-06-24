@@ -56,6 +56,19 @@ var JiraCommand = function () {
             });
         }
     }, {
+        key: 'getBoards',
+        value: function getBoards() {
+            jiraClient.doRequest(jiraClient.makeRequestHeader(jiraClient.makeAgileUri({
+                pathname: '/board',
+                query: {
+                    startAt: 0,
+                    maxResults: 100
+                }
+            }))).then(function (res) {
+                console.log(res);
+            });
+        }
+    }, {
         key: 'findRapidView',
         value: function findRapidView() {
             console.log(this.project.name);
@@ -66,16 +79,34 @@ var JiraCommand = function () {
     }, {
         key: 'getAllProjectIssues',
         value: function getAllProjectIssues() {
+            var _this2 = this;
+
             jiraClient.searchJira('project = ' + this.project.name, { maxResults: 500 }).then(function (res) {
                 console.log(res.issues.map(function (issue) {
                     return issue.fields;
                 }));
+                res.issues.map(function (issue) {
+                    return console.log({
+                        id: issue.id,
+                        code: issue.fields.customfield_10008,
+                        title: issue.fields.summary,
+                        assigne: issue.fields.assigne,
+                        priority: issue.fields.priority,
+                        status: issue.fields.status,
+                        type: issue.fields.type,
+                        creator: issue.fields.creator,
+                        key: issue.key,
+                        created_at: issue.fields.created,
+                        updated_at: issue.fields.updated
+                    });
+                });
+                _this2.getBoards();
             });
         }
     }, {
         key: 'askChooseProject',
         value: function askChooseProject() {
-            var _this2 = this;
+            var _this3 = this;
 
             _inquirer2.default.prompt([{
                 type: "list",
@@ -85,11 +116,11 @@ var JiraCommand = function () {
                     return { name: project.name, value: project.id };
                 })
             }]).then(function (answers) {
-                _this2.answer = Object.assign({}, _this2.answer, answers);
-                console.log(_this2.answer);
-                jiraClient.getProject(_this2.answer.project).then(function (res) {
-                    _this2.project = res;
-                    _this2.getAllProjectIssues();
+                _this3.answer = Object.assign({}, _this3.answer, answers);
+                console.log(_this3.answer);
+                jiraClient.getProject(_this3.answer.project).then(function (res) {
+                    _this3.project = res;
+                    _this3.getAllProjectIssues();
                 });
             });
         }

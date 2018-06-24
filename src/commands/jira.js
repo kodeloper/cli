@@ -29,6 +29,19 @@ export default class JiraCommand {
             }
         );
     }
+    getBoards(){
+        jiraClient.doRequest(jiraClient.makeRequestHeader(jiraClient.makeAgileUri({
+            pathname: '/board',
+            query: {
+              startAt: 0,
+              maxResults: 100,
+            }
+        }))).then(
+            res => {
+                console.log(res);
+            }
+        );
+    }
     findRapidView() {
         console.log(this.project.name);
         jiraClient.findRapidView(this.project.name)
@@ -43,6 +56,22 @@ export default class JiraCommand {
             .then(
                 res => {
                     console.log(res.issues.map(issue => issue.fields));
+                    res.issues.map(issue => console.log(
+                        {   
+                            id: issue.id,
+                            code: issue.fields.customfield_10008,
+                            title: issue.fields.summary,
+                            assigne: issue.fields.assigne,
+                            priority: issue.fields.priority,
+                            status: issue.fields.status,
+                            type: issue.fields.type,
+                            creator: issue.fields.creator,
+                            key: issue.key,
+                            created_at: issue.fields.created,
+                            updated_at: issue.fields.updated,      
+                        }
+                    ));
+                    this.getBoards();
                 }
             );
     }

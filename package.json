@@ -6,8 +6,11 @@
   "scripts": {
     "test": "test",
     "build": "npx babel src --out-dir build --presets=env",
-    "upload": "node -r dotenv/config ./build/index.js -- jira",
-    "kodeloper": "npm run build && npm run upload"
+    "upload": "node -r dotenv/config ./build/index.js -- upload",
+    "bitbucket": "node -r dotenv/config ./build/index.js -- bitbucket",
+    "jira": "node -r dotenv/config ./build/index.js -- jira",
+    "start": "node -r dotenv/config ./build/index.js",
+    "start:debug": "node --inspect -r dotenv/config ./build/index.js"
   },
   "repository": {
     "type": "git",
